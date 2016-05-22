@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "/Users/vence/AndroidWorkSpace/QingTravel/PullToRefresh_library/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi-v4/default_ptr_flip.png",
+        "source": "/Users/vence/AndroidWorkSpace/QingTravel/PullToRefresh_library/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/default_ptr_flip.png"
+    },
+    {
+        "merged": "/Users/vence/AndroidWorkSpace/QingTravel/PullToRefresh_library/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi-v4/default_ptr_rotate.png",
+        "source": "/Users/vence/AndroidWorkSpace/QingTravel/PullToRefresh_library/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/default_ptr_rotate.png"
+    },
+    {
+        "merged": "/Users/vence/AndroidWorkSpace/QingTravel/PullToRefresh_library/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi-v4/indicator_arrow.png",
+        "source": "/Users/vence/AndroidWorkSpace/QingTravel/PullToRefresh_library/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/indicator_arrow.png"
+    }
+]

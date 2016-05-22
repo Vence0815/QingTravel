@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:id="@+id/rl_search_bar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#00b0ec"
+        android:padding="5dp">
+
+        <ImageView
+            android:id="@+id/img_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/arrow_left_big" />
+
+        <EditText
+            android:id="@+id/et_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/txt_serarch"
+            android:layout_toRightOf="@+id/img_back"
+            android:background="#ffffff"
+            android:hint="请输入你要查询的关键词"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/txt_serarch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="搜索"
+            android:textColor="#ffffff"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="很抱歉，暂无结果"
+        android:textSize="20sp"
+        android:visibility="gone"
+        android:layout_centerInParent="true"/>
+
+    <ListView
+        android:id="@+id/lv_serach"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_search_bar" />
+
+
+
+</RelativeLayout>

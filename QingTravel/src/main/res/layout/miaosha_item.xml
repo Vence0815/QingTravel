@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:background="@drawable/backgroung">
+
+    <ImageView
+        android:id="@+id/iv_miaosha_pic"
+        android:layout_width="280dp"
+        android:layout_height="120dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/test" />
+
+    <TextView
+        android:id="@+id/tv_miaosha_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_miaosha_pic"
+        android:text="北京出发 奥法医11日游"
+        android:layout_marginTop="5dp"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:textSize="14sp"
+        android:textColor="#000000"/>
+
+    <TextView
+        android:id="@+id/tv_miaosha_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tv_miaosha_title"
+        android:text="2016/02/22"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:id="@+id/tv_miaosha_prise"
+        android:layout_marginTop="5dp"
+        android:textSize="16sp"
+        android:textColor="#ff0000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tv_miaosha_time"
+        android:text="10888" />
+</RelativeLayout>
