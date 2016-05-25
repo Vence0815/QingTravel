@@ -10,6 +10,9 @@ import android.widget.TextView;
 import com.vence.qingtravel.R;
 import com.vence.qingtravel.activity.CityListActivity;
 import com.vence.qingtravel.demon.CityList;
+import com.vence.qingtravel.demon.ResultAddressEvent;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -18,14 +21,14 @@ import java.util.List;
  * 邮箱 ：vence0815@foxmail.com
  */
 public class HotCityListAdapter extends BaseAdapter {
-    private boolean isCenter=false;
+    private boolean isCenter = false;
     private CityListActivity context;
     List<CityList.PEntity> cityList;
 
-    public HotCityListAdapter(CityListActivity cityListActivity, List<CityList.PEntity> cityList,boolean isCenter) {
+    public HotCityListAdapter(CityListActivity cityListActivity, List<CityList.PEntity> cityList, boolean isCenter) {
         this.context = cityListActivity;
         this.cityList = cityList;
-        this.isCenter=isCenter;
+        this.isCenter = isCenter;
     }
 
 
@@ -57,9 +60,9 @@ public class HotCityListAdapter extends BaseAdapter {
         }
 
         final CityList.PEntity pEntity = cityList.get(position);
-        if(isCenter) {
+        if (isCenter) {
             viewHolder.tv_litter.setGravity(Gravity.CENTER);
-        }else{
+        } else {
             viewHolder.tv_litter.setGravity(Gravity.LEFT);
         }
 
@@ -67,10 +70,11 @@ public class HotCityListAdapter extends BaseAdapter {
         viewHolder.tv_litter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //带结果的回调
-                Intent intent = new Intent();
-                intent.putExtra("cityID", pEntity.getId());
-                context.setResult(1, intent);
+                ResultAddressEvent resultAddressEvent = new ResultAddressEvent();
+                resultAddressEvent.cityName = pEntity.getN();
+
+                EventBus.getDefault().postSticky(resultAddressEvent);
+
                 context.finish();
             }
         });

@@ -23,28 +23,29 @@ import java.util.List;
 public class UserInforDao {
     private DBhelper mBhelper;
     public static  final String TAG = "UserInforDao";
+
+
     public UserInforDao(Context context) {
         mBhelper = new DBhelper(context);
     }
 
     //登录查询
-    public List<UserInfor> loginSelect(String userName) {
+    public UserInfor loginSelect(String userName) {
         SQLiteDatabase db = mBhelper.getReadableDatabase();
         String sql = "select * from user_infor where username =?";
-        List<UserInfor> data = new ArrayList<UserInfor>();
+        UserInfor infor =null;
         Cursor cursor = db.rawQuery(sql, new String[]{userName});
         while (cursor.moveToNext()) {
             String userNam = cursor.getString(1);
             String passWord = cursor.getString(2);
             String imageUrl = cursor.getString(3);
 
-            UserInfor infor = new UserInfor();
+            infor = new UserInfor();
             infor.setUserName(userNam);
             infor.setPassWord(passWord);
             infor.setImageUrl(imageUrl);
-            data.add(infor);
         }
-        return data;
+        return infor;
     }
 
     //注册添加

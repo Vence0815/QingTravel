@@ -101,50 +101,41 @@ public class SearchAcy extends Activity {
      */
     private void getDataFromServer() {
 
-
-
         String keyword = etSearch.getText().toString();
         if (keyword.isEmpty()) {
             Toast.makeText(SearchAcy.this, "请输入你要搜索的关键词", Toast.LENGTH_SHORT).show();
-            return;
+        } else {
+            show = ProgressDialog.show(this, null, "正在搜索中...", true);
+
+            VolleyManager.newInstance().GsonGetRequest("TAG", Url.DETAIL + keyword, DetailModel.class, new Response.Listener<DetailModel>() {
+                @Override
+                public void onResponse(DetailModel response) {
+                    //           Loading.dismissLoading();
+                    processData(response);
+                    show.dismiss();
+                }
+
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    //           Loading.dismissLoading();
+                    show.dismiss();
+                }
+            });
         }
-
-
-        show = ProgressDialog.show(this, null, "正在搜索中...", true);
-
-        VolleyManager.newInstance().GsonGetRequest("TAG", Url.DETAIL + keyword, DetailModel.class, new Response.Listener<DetailModel>() {
-            @Override
-            public void onResponse(DetailModel response) {
-     //           Loading.dismissLoading();
-                processData(response);
-                show.dismiss();
-            }
-
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-     //           Loading.dismissLoading();
-                show.dismiss();
-            }
-        });
     }
 
 
     /**
      * 处理得到的数据
+     *
      * @param response
      */
     private void processData(DetailModel response) {
         list = response.getList();
-        if (list == null) {
-            tv_hint.setVisibility(View.VISIBLE);
-            listView.setVisibility(View.GONE);
-        } else {
-            listView.setAdapter(adapter);
-            tv_hint.setVisibility(View.GONE);
-            listView.setVisibility(View.VISIBLE);
-        }
-
+        View view = findViewById(R.id.rl_empt);
+        listView.setAdapter(adapter);
+        listView.setEmptyView(view);
         show.dismiss();
     }
 

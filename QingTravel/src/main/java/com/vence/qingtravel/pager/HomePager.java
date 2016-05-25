@@ -19,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
+import com.vence.qingtravel.MainActivity;
 import com.vence.qingtravel.R;
 import com.vence.qingtravel.activity.BuyDetailActivity;
 import com.vence.qingtravel.activity.CityListActivity;
@@ -30,16 +31,19 @@ import com.vence.qingtravel.adapter.MiaoShaAdapter;
 import com.vence.qingtravel.adapter.TopBannerAdapter;
 import com.vence.qingtravel.base.BasePager;
 import com.vence.qingtravel.constent.Url;
+import com.vence.qingtravel.demon.AddressEvent;
 import com.vence.qingtravel.demon.BuyEvent;
-import com.vence.qingtravel.demon.DetailModel;
 import com.vence.qingtravel.demon.HomeData;
 import com.vence.qingtravel.demon.MiaoSha;
+import com.vence.qingtravel.demon.ResultAddressEvent;
 import com.vence.qingtravel.utils.CacheUtils;
 import com.vence.qingtravel.view.NoScrollGridView;
 import com.vence.qingtravel.view.NoScrollListView;
 import com.vence.qingtravel.volley.VolleyManager;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.xutils.common.util.DensityUtil;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
@@ -68,7 +72,7 @@ public class HomePager extends BasePager implements View.OnClickListener {
     private ViewPager vp_head;
 
     @ViewInject(R.id.gv_banner)
-   private NoScrollGridView gv_banner;
+    private NoScrollGridView gv_banner;
 
     @ViewInject(R.id.gv_miaosha)
     private NoScrollGridView gv_miaosha;
@@ -81,6 +85,9 @@ public class HomePager extends BasePager implements View.OnClickListener {
 
     @ViewInject(R.id.tv_location)
     private TextView tv_location;//定位的城市
+
+    @ViewInject(R.id.img_mine)
+    private ImageView img_mine;
 
     private String city;
 
@@ -96,6 +103,9 @@ public class HomePager extends BasePager implements View.OnClickListener {
     public HomePager(Activity activity, String city) {
         super(activity);
         this.city = city;
+
+        EventBus.getDefault().register(this);
+
     }
 
 
@@ -117,12 +127,6 @@ public class HomePager extends BasePager implements View.OnClickListener {
         tv_top_hot.setOnClickListener(this);
         tv_top_search.setOnClickListener(this);
         //设置默认的选项
-        tv_top_hot.setSelected(true);
-        if (city == null) {
-            tv_location.setText("北京");
-        } else {
-            tv_location.setText(city);
-        }
 
         setListener();
         gv_banner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -162,6 +166,14 @@ public class HomePager extends BasePager implements View.OnClickListener {
             public void onClick(View v) {
                 Intent intent = new Intent(mActivity, CityListActivity.class);
                 mActivity.startActivityForResult(intent, Activity.RESULT_OK);
+            }
+        });
+
+        img_mine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity mActicity = (MainActivity) mActivity;
+                mActicity.setCurrentFragment(3);
             }
         });
     }
@@ -377,4 +389,25 @@ public class HomePager extends BasePager implements View.OnClickListener {
                 break;
         }
     }
+
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onEvent(AddressEvent addressEvent) {
+        EventBus.getDefault().removeStickyEvent(addressEvent);
+        String city = addressEvent.city;
+        if (!city.isEmpty()) {
+            tv_location.setText(city);
+        }
+    }
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onEvent(ResultAddressEvent resultAddressEvent) {
+        EventBus.getDefault().removeStickyEvent(resultAddressEvent);
+        String city = resultAddressEvent.cityName;
+        if (!city.isEmpty()) {
+            tv_location.setText(city);
+        }
+    }
+
+
 }

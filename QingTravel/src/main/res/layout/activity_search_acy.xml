@@ -41,20 +41,38 @@
             android:textSize="15sp" />
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/tv_hint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="很抱歉，暂无结果"
-        android:textSize="20sp"
-        android:visibility="gone"
-        android:layout_centerInParent="true"/>
+
 
     <ListView
+        android:visibility="gone"
         android:id="@+id/lv_serach"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/rl_search_bar" />
+
+    <RelativeLayout
+        android:id="@+id/rl_empt"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/img_empt"
+            android:id="@+id/tv_hint"
+            android:layout_centerInParent="true"
+            android:textSize="23sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="暂无数据"/>
+
+        <ImageView
+            android:id="@+id/img_empt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/btn_commodity_no"/>
+
+    </RelativeLayout>
 
 
 

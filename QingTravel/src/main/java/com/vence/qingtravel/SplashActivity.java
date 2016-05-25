@@ -13,8 +13,10 @@ import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
+import com.vence.qingtravel.demon.AddressEvent;
 import com.vence.qingtravel.service.LocationService;
 
+import org.greenrobot.eventbus.EventBus;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
@@ -87,6 +89,9 @@ public class SplashActivity extends Activity {
         @Override
         public void onReceiveLocation(BDLocation bdLocation) {
             city = bdLocation.getCity();
+            AddressEvent addressEvent = new AddressEvent();
+            addressEvent.city = city;
+            EventBus.getDefault().postSticky(addressEvent);
         }
     };
 

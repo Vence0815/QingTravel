@@ -73,6 +73,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                                 userInfor.setPassWord(s);
                                 userInfor.setUserName(phone);
                                 dao.adduserInfor(userInfor);
+                                finish();
                             }
                         });
                     } else {

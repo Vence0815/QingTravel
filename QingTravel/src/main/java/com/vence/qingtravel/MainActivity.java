@@ -32,6 +32,7 @@ public class MainActivity extends Activity {
     @ViewInject(R.id.rg_main)
     private RadioGroup rg_main;
 
+
     private List<BasePager> mPagers;
     private int mPosition;
     private String city ="杭州";
@@ -80,6 +81,14 @@ public class MainActivity extends Activity {
             setFragment();
         }
     }
+
+    public void setCurrentFragment(int positon) {
+        mPosition = positon;
+        rg_main.check(R.id.rb_mine);
+        setFragment();
+    }
+
+
 
     /**
      * 设置相应的页面
